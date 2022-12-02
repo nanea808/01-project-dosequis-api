@@ -1,5 +1,9 @@
 // Ensures code runs after html doc loads
 $(() => {
+    // Elements
+    var userInputEl = $('#user-input');
+    var searchButton = userInputEl.children('button');
+    console.log(searchButton);
     // ## Function to load response data as button elements ★ ##
     /* store important data in data-{blank} attributes */
 
@@ -10,7 +14,9 @@ $(() => {
 
     // ## Event discovery api function ✈ ##
     var eventDiscovery = function (userInput) {
+        // Take user input and inject into api call
         var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + userInput + '&countryCode=US&apikey=iQvDtAeqOGfetg1ilGAAF6sw3ekPWih6'
+
         fetch(requestUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
@@ -21,9 +27,8 @@ $(() => {
                 // Replace alert with print to site (modal?)
                 alert('Error: ' + response.statusText);
             }
-        })
+        });
     }
-    eventDiscovery("underwood");
 
     // # Event location api function ♣ #
     /* 
@@ -55,7 +60,12 @@ $(() => {
             })
     }
 
+    var formInput = function () {
+
+    }
     // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
+    userInputEl.submit(formInput);
+    searchButton.click(formInput);
 
     // ## Event listener to take user input on button elements ##
     /* Take event id from button elements and pass into location api function ♣ */
