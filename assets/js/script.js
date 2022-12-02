@@ -1,5 +1,9 @@
 // Ensures code runs after html doc loads
 $(() => {
+    // Elements
+    var userInputEl = $('#user-input');
+    var searchButton = userInputEl.children('button');
+    console.log(searchButton);
     // ## Function to load response data as button elements ★ ##
     /* store important data in data-{blank} attributes */
 
@@ -8,28 +12,35 @@ $(() => {
         console.log("The handleWeatherInformation function is being called with "+weatherData +"as a parameter.");
     }
 
-    // ## Two Ticketmaster api functions ##
-        // # Event discovery api function ✈ #
-        /* 
-        Take user input and inject into api call
-        var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + userInput + '&countryCode=US&apikey={apikey}'
+    // ## Event discovery api function ✈ ##
+    var eventDiscovery = function (userInput) {
+        // Take user input and inject into api call
+        var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + userInput + '&countryCode=US&apikey=iQvDtAeqOGfetg1ilGAAF6sw3ekPWih6'
 
-        Fetch request using requestUrl
+        fetch(requestUrl).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    // Pass data into the function to load responses onto page ★
+                });
+            } else {
+                // Replace alert with print to site (modal?)
+                alert('Error: ' + response.statusText);
+            }
+        });
+    }
 
-        Pass data into the function to load responses onto page ★
-        */
+    // # Event location api function ♣ #
+    /* 
+    Take event id and inject into api call
+    var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
 
-        // # Event location api function ♣ #
-        /* 
-        Take event id and inject into api call
-        var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
+    Fetch request using requestUrl
 
-        Fetch request using requestUrl
+    Pass lat and lon data into the weather api function ☁
+    */
 
-        Pass lat and lon data into the weather api function ☁
-        */
-
-        getWeatherBasedOnLatLon(45.5152, 122.6784);
+    getWeatherBasedOnLatLon(45.5152, 122.6784);
 
     // ## One weather api function ☁ ##
     function getWeatherBasedOnLatLon(enteredLat, enteredLon) {
@@ -49,9 +60,13 @@ $(() => {
             })
     }
 
+    var formInput = function () {
+        var inputField = userInputEl.children('input');
+    }
     // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
+    userInputEl.submit(formInput);
+    searchButton.click(formInput);
 
     // ## Event listener to take user input on button elements ##
     /* Take event id from button elements and pass into location api function ♣ */
-    
 });
