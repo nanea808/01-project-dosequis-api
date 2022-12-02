@@ -61,7 +61,7 @@ $(() => {
     }
 
     var formInput = function () {
-
+        var inputField = userInputEl.children('input');
     }
     // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
     userInputEl.submit(formInput);
