@@ -1,5 +1,14 @@
 // Ensures code runs after html doc loads
 $(() => {
+    //mobile menu
+    const burgerIcon = document.querySelector('#burger');
+    const navbarMenu = document.querySelector('#nav-links');
+    
+    burgerIcon.addEventListener('click', () => {
+      navbarMenu.classList.toggle('is-active');
+    });
+
+
     // Elements
     var userInputEl = $('#user-input');
     var searchButton = userInputEl.children('.buttons').children('button');
@@ -133,7 +142,7 @@ $(() => {
             eventDiscovery(userKeyword);
         }
     });
-
+    let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     searchButton.click(function (e) {
         e.preventDefault();
         var inputField = userInputEl.children('input');
@@ -142,6 +151,10 @@ $(() => {
         if (userKeyword.length > 0) {
             eventDiscovery(userKeyword);
         }
+
+        eventDiscovery(userKeyword);
+        searchHistory.push(userKeyword);
+        localStorage.setItem("search", JSON.stringify(searchHistory));
     });
 
     // ## Event listener to take user input on button elements ##
