@@ -10,7 +10,6 @@ Working as a team also taught us agile development methodologies and implement f
 User Story <br>
 As a user I want to be able to search for events with information about it's location and weather so that I can plan and prepare appropriately.
 
-
 ## Installation
 
 N/A
