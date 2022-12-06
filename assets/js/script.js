@@ -12,13 +12,69 @@ $(() => {
     // Elements
     var userInputEl = $('#user-input');
     var searchButton = userInputEl.children('.buttons').children('button');
-    console.log(searchButton);
+    var cardsEl = $('#cards');
+
+    console.log(cardsEl);
     // ## Function to load response data as button elements ★ ##
     /* store important data in data-{blank} attributes */
     function loadEvents(eventsData) {
         var eventsArray = eventsData._embedded.events;
         console.log(eventsArray);
-        
+
+        for (var x = 0; x < eventsArray.length; x++) {
+            // element variables
+            var imageUrl = eventsArray[x].images[0].url;
+            var title = eventsArray[x].name;
+            var location = eventsArray[x]._embedded.venues[0].city.name + ", " + eventsArray[x]._embedded.venues[0].state.name;
+
+            // Parent
+            var cardEl = $('<div>');
+            cardEl.attr('class', 'card');
+
+            // Content: child of Parent
+            var contentEl = $('<div>');
+            contentEl.attr('class', 'card-content');
+            
+            // Media: child of Content
+            var cardMediaEl = $('<div>');
+            cardMediaEl.attr('class', 'media');
+
+            // cardContent: child of Content
+            var cardContentEl = $('<div>');
+            cardContentEl.attr('class', 'content');
+            
+            // Children of Media
+            var mediaLeft = $('<div>'); // Media Left
+            mediaLeft.attr('class', 'media-left');
+                var mediaFigure = $('<figure>'); // Child of Media Left
+                mediaFigure.attr('class', 'image is-128x128');
+
+                var mediaImage = $('<img>'); // Child of ^
+                mediaImage.attr('src', imageUrl); // ## Image ##
+
+            var mediaContent = $('<div>'); // Media Content
+            mediaContent.attr('class', 'media-content');
+                var mContentTitle = $('<p>');
+                mContentTitle.attr('class', 'title is-4');
+                mContentTitle.text(title); // ## Title ##
+                var mContentSubTitle = $('<p>');
+                mContentSubTitle.attr('class', 'subtitle is-6');
+                mContentSubTitle.text(location); // ## Subtitle ##
+
+            // Appends
+            contentEl.append(cardContentEl); // cardContent: child of Content
+                    
+                    mediaFigure.append(mediaImage);
+                    mediaLeft.append(mediaFigure);
+                cardMediaEl.append(mediaLeft); 
+                    mediaContent.append(mContentTitle);
+                    mediaContent.append(mContentSubTitle);
+                cardMediaEl.append(mediaContent);
+            contentEl.append(cardMediaEl); // Media: child of Content
+            
+            cardEl.append(contentEl); // Content: child of Parent
+            cardsEl.append(cardEl); // Parent
+        }
     }
 
     // ## Function to load weather data as a modal element ♥ ##
