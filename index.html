@@ -15,28 +15,26 @@
 
 <body>
     <nav class="breadcrumb is-medium is-right" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="#">Bulma</a></li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Components</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-        </ul>
+        <a class="navbar-burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+      
+        <div class="navbar-menu" id="nav-links">
+          <!-- mobile menu -->
+          <div class="navbar-end">
+            <a class="navbar-item">Home</a>
+            <a class="navbar-item">Github</a>
+          </div>
+        </div>
     </nav>
-
-    <!-- <body class="flex-column min-100-vh">
-    <header class="hero">
-      <h1 class="app-title"><i class="fab fa-github"></i> Git it Done!</h1>
-      <p>Search for a GitHub user or click on a language to see a list of repositories and how many open issues they have!
-      </p>
-    </header> -->
-    <!-- 3:2 - 427x640 -->
-
     <section>
         <div class="block is-size-1 has-text-centered">Search an <strong>event</strong></div>
     </section>
     <form action="" id="user-input">
         <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
-        <div class="buttons is-centered">
+        <div class="buttons is-centered py-3">
             <button class="button is-info">Get Event Weather</button>
         </div>
     </form>

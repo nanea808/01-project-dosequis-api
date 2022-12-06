@@ -1,5 +1,14 @@
 // Ensures code runs after html doc loads
 $(() => {
+    //mobile menu
+    const burgerIcon = document.querySelector('#burger');
+    const navbarMenu = document.querySelector('#nav-links');
+    
+    burgerIcon.addEventListener('click', () => {
+      navbarMenu.classList.toggle('is-active');
+    });
+
+
     // Elements
     var userInputEl = $('#user-input');
     var searchButton = userInputEl.children('.buttons').children('button');
