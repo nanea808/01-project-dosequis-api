@@ -9,6 +9,7 @@ $(() => {
     function loadEvents(eventsData) {
         var eventsArray = eventsData._embedded.events;
         console.log(eventsArray);
+        
     }
 
     // ## Function to load weather data as a modal element ♥ ##
@@ -27,7 +28,10 @@ $(() => {
             })
             .then(function (data) {
                     console.log(data);
-                    loadEvents(data);
+                    if (data._embedded) {
+                        loadEvents(data);
+                    }
+                    
                     // Pass data into the function to load responses onto page ★
             });
     }
@@ -63,18 +67,26 @@ $(() => {
             })
     }
 
-    function formInput() {
+    // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
+    userInputEl.submit(function (e) {
+        e.preventDefault();
         var inputField = userInputEl.children('input');
         var userKeyword = inputField.val().trim();
         
         if (userKeyword.length > 0) {
             eventDiscovery(userKeyword);
         }
-    }
-    
-    // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
-    userInputEl.submit(formInput);
-    searchButton.click(formInput);
+    });
+
+    searchButton.click(function (e) {
+        e.preventDefault();
+        var inputField = userInputEl.children('input');
+        var userKeyword = inputField.val().trim();
+        
+        if (userKeyword.length > 0) {
+            eventDiscovery(userKeyword);
+        }
+    });
 
     // ## Event listener to take user input on button elements ##
     /* Take event id from button elements and pass into location api function ♣ */
