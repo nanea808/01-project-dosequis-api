@@ -3,13 +3,57 @@ $(() => {
     // Elements
     var userInputEl = $('#user-input');
     var searchButton = userInputEl.children('.buttons').children('button');
-    console.log(searchButton);
+    var cardsEl = $('#cards');
+
+    console.log(cardsEl);
     // ## Function to load response data as button elements ★ ##
     /* store important data in data-{blank} attributes */
     function loadEvents(eventsData) {
         var eventsArray = eventsData._embedded.events;
         console.log(eventsArray);
-        
+
+        for (var x = 0; x < eventsArray.length; x++) {
+            // Parent
+            var cardEl = $('<div>');
+            cardEl.attr('class', 'card');
+
+            // Content: child of Parent
+            var contentEl = $('<div>');
+            contentEl.attr('class', 'card-content');
+            
+            // Media: child of Content
+            var cardMediaEl = $('<div>');
+            cardMediaEl.attr('class', 'media');
+
+            // cardContent: child of Content
+            var cardContentEl = $('<div>');
+            cardContentEl.attr('class', 'content');
+            
+            // Children of Media
+            var mediaLeft = $('<div>'); // Media Left
+            mediaLeft.attr('class', 'media-left');
+            var mediaContent = $('<div>'); // Media Content
+            mediaContent.attr('class', 'media-content');
+
+            var mediaFigure = $('<figure>'); // Child of Media Left
+            mediaFigure.attr('class', 'image is-128x128');
+
+            var mediaImage = $('<img>'); // Child of ^
+            mediaImage.attr('src', eventsArray[x].images[0].url);
+
+            // Appends
+            contentEl.append(cardContentEl); // cardContent: child of Content
+
+                cardMediaEl.append(mediaContent);
+                    mediaFigure.append(mediaImage);
+                    mediaLeft.append(mediaFigure);
+                cardMediaEl.append(mediaLeft); 
+            contentEl.append(cardMediaEl); // Media: child of Content
+            
+            cardEl.append(contentEl); // Content: child of Parent
+            cardsEl.append(cardEl); // Parent
+
+        }
     }
 
     // ## Function to load weather data as a modal element ♥ ##
