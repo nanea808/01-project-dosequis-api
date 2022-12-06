@@ -32,22 +32,30 @@ $(() => {
             // Children of Media
             var mediaLeft = $('<div>'); // Media Left
             mediaLeft.attr('class', 'media-left');
+                var mediaFigure = $('<figure>'); // Child of Media Left
+                mediaFigure.attr('class', 'image is-128x128');
+
+                var mediaImage = $('<img>'); // Child of ^
+                mediaImage.attr('src', eventsArray[x].images[0].url); // ## Image ##
+
             var mediaContent = $('<div>'); // Media Content
             mediaContent.attr('class', 'media-content');
-
-            var mediaFigure = $('<figure>'); // Child of Media Left
-            mediaFigure.attr('class', 'image is-128x128');
-
-            var mediaImage = $('<img>'); // Child of ^
-            mediaImage.attr('src', eventsArray[x].images[0].url);
+                var mContentTitle = $('<p>');
+                mContentTitle.attr('class', 'title is-4');
+                mContentTitle.text(eventsArray[x].name); // ## Title ##
+                var mContentSubTitle = $('<p>');
+                mContentSubTitle.attr('class', 'subtitle is-6');
+                mContentSubTitle.text(eventsArray[x].dates.start.localDate); // ## Subtitle ##
 
             // Appends
             contentEl.append(cardContentEl); // cardContent: child of Content
-
-                cardMediaEl.append(mediaContent);
+                    
                     mediaFigure.append(mediaImage);
                     mediaLeft.append(mediaFigure);
                 cardMediaEl.append(mediaLeft); 
+                    mediaContent.append(mContentTitle);
+                    mediaContent.append(mContentSubTitle);
+                cardMediaEl.append(mediaContent);
             contentEl.append(cardMediaEl); // Media: child of Content
             
             cardEl.append(contentEl); // Content: child of Parent
