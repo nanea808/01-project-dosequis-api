@@ -13,6 +13,11 @@ $(() => {
         console.log(eventsArray);
 
         for (var x = 0; x < eventsArray.length; x++) {
+            // element variables
+            var imageUrl = eventsArray[x].images[0].url;
+            var title = eventsArray[x].name;
+            var location = eventsArray[x]._embedded.venues[0].city.name + ", " + eventsArray[x]._embedded.venues[0].state.name;
+
             // Parent
             var cardEl = $('<div>');
             cardEl.attr('class', 'card');
@@ -36,16 +41,16 @@ $(() => {
                 mediaFigure.attr('class', 'image is-128x128');
 
                 var mediaImage = $('<img>'); // Child of ^
-                mediaImage.attr('src', eventsArray[x].images[0].url); // ## Image ##
+                mediaImage.attr('src', imageUrl); // ## Image ##
 
             var mediaContent = $('<div>'); // Media Content
             mediaContent.attr('class', 'media-content');
                 var mContentTitle = $('<p>');
                 mContentTitle.attr('class', 'title is-4');
-                mContentTitle.text(eventsArray[x].name); // ## Title ##
+                mContentTitle.text(title); // ## Title ##
                 var mContentSubTitle = $('<p>');
                 mContentSubTitle.attr('class', 'subtitle is-6');
-                mContentSubTitle.text(eventsArray[x].dates.start.localDate); // ## Subtitle ##
+                mContentSubTitle.text(location); // ## Subtitle ##
 
             // Appends
             contentEl.append(cardContentEl); // cardContent: child of Content
@@ -60,7 +65,6 @@ $(() => {
             
             cardEl.append(contentEl); // Content: child of Parent
             cardsEl.append(cardEl); // Parent
-
         }
     }
 
