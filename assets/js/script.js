@@ -86,7 +86,7 @@ $(() => {
             eventDiscovery(userKeyword);
         }
     });
-
+    let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     searchButton.click(function (e) {
         e.preventDefault();
         var inputField = userInputEl.children('input');
@@ -95,6 +95,10 @@ $(() => {
         if (userKeyword.length > 0) {
             eventDiscovery(userKeyword);
         }
+
+        eventDiscovery(userKeyword);
+        searchHistory.push(userKeyword);
+        localStorage.setItem("search", JSON.stringify(searchHistory));
     });
 
     // ## Event listener to take user input on button elements ##
