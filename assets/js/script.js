@@ -2,35 +2,39 @@
 $(() => {
     // Elements
     var userInputEl = $('#user-input');
-    var searchButton = userInputEl.children('button');
+    var searchButton = userInputEl.children('.buttons').children('button');
     console.log(searchButton);
     // ## Function to load response data as button elements ★ ##
     /* store important data in data-{blank} attributes */
+    function loadEvents(eventsData) {
+        var eventsArray = eventsData._embedded.events;
+        console.log(eventsArray);
+    }
 
     // ## Function to load weather data as a modal element ♥ ##
     function handleWeatherInformation(weatherData) {
         console.log("The handleWeatherInformation function is being called with "+weatherData +"as a parameter.");
     }
-
+    
     // ## Event discovery api function ✈ ##
-    var eventDiscovery = function (userInput) {
+    function eventDiscovery(userInput) {
         // Take user input and inject into api call
-        var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + userInput + '&countryCode=US&apikey=iQvDtAeqOGfetg1ilGAAF6sw3ekPWih6'
+        var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + userInput + '&countryCode=US&apikey=iQvDtAeqOGfetg1ilGAAF6sw3ekPWih6';
 
-        fetch(requestUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
+        fetch(requestUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
                     console.log(data);
+                    loadEvents(data);
                     // Pass data into the function to load responses onto page ★
-                });
-            } else {
-                // Replace alert with print to site (modal?)
-                alert('Error: ' + response.statusText);
-            }
-        });
+            });
     }
 
-    // # Event location api function ♣ #
+    eventDiscovery("Super Bowl");
+
+    // ## Event location api function ♣ ##
     /* 
     Take event id and inject into api call
     var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
@@ -39,7 +43,6 @@ $(() => {
 
     Pass lat and lon data into the weather api function ☁
     */
-
     getWeatherBasedOnLatLon(45.5152, 122.6784);
 
     // ## One weather api function ☁ ##
@@ -53,16 +56,22 @@ $(() => {
                 return response.json();
             })
             .then(function(data) {
-                console.log("our data is: "+data);
+                console.log(data);
                 console.log("our temperature is: "+data.current_weather.temperature + "° Fahrenheit.");
                 //Take reponse and pass into modal function ♥
                 handleWeatherInformation(data);
             })
     }
 
-    var formInput = function () {
+    function formInput() {
         var inputField = userInputEl.children('input');
+        var userKeyword = inputField.val().trim();
+        
+        if (userKeyword.length > 0) {
+            eventDiscovery(userKeyword);
+        }
     }
+    
     // ## Event listener to take user input and pass to Ticketmaster event discovery api function ✈ ##
     userInputEl.submit(formInput);
     searchButton.click(formInput);
