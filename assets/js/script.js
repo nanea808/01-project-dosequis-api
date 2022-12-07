@@ -11,7 +11,6 @@ $(() => {
 
     // Elements
     var userInputEl = $('#user-input');
-
     var searchButton = userInputEl.children('.buttons').children('button');
     var ourModalsList = $('#modal-list');
     console.log(searchButton);
@@ -87,14 +86,14 @@ $(() => {
             temp in Fahrenheit
             windspeed in mph
             humidity as a percentage
-            forecast weather (all of the above, except as a forecast)
+            forecast weather (all of the above, except as a forecast)--see note
         */
         ourModalsList.children().eq(0).text(weatherData.current_weather.temperature + "° Fahrenheit.");
         ourModalsList.children().eq(1).text(weatherData.current_weather.windspeed + " mph");
-        ourModalsList.children().eq(2).text(weatherData.current_weather.humidity + "% humidity");
-        //note: we need to decide how to format forecast data. Suggested: we need to figure out the event date/time and get the forecast if it's within the 7-day window.
-        //this function will need to be passed the date/time of the event.
-        //if the event is outside our forecast window we can display only the current weather and a message: "event is outside available forecast."
+        //***meteo doesn't offer humidity for current weather. ourModalsList.children().eq(2).text(weatherData.current_weather.humidity + "% humidity");
+
+        // Suggested: we need to figure out the event date/time and get the forecast if it's within the 7-day window.
+        //this function will need to be passed the date/time of the event to figure out what data to display.
     }
     
     // ## Event discovery api function ✈ ##
@@ -128,7 +127,7 @@ $(() => {
     Pass lat and lon data into the weather api function ☁
     */
     //the following example lat/lon is for Portland, OR: 
-    getWeatherBasedOnLatLon(45.5152, 122.6784);
+    getWeatherBasedOnLatLon(45.523064, -122.676483);
 
     // ## One weather api function ☁ ##
     function getWeatherBasedOnLatLon(enteredLat, enteredLon) {
