@@ -26,24 +26,25 @@ $(() => {
             var imageUrl = eventsArray[x].images[0].url;
             var title = eventsArray[x].name;
             var location = eventsArray[x]._embedded.venues[0].city.name + ", " + eventsArray[x]._embedded.venues[0].state.name;
+            var desc = eventsArray[x].classifications[0].genre.name;
+            if (!eventsArray[x].dates.start.dateTBA && !eventsArray[x].dates.start.dateTBD) {
+                var date = eventsArray[x].dates.start.dateTime;
+                var time = eventsArray[x].dates.start.localTime;
+            }
 
             // Parent
             var cardEl = $('<div>');
             cardEl.attr('class', 'card');
 
-            // Content: child of Parent
+            // cardContent: child of Parent
             var contentEl = $('<div>');
             contentEl.attr('class', 'card-content');
             
-            // Media: child of Content
+            // Media: child of cardContent
             var cardMediaEl = $('<div>');
             cardMediaEl.attr('class', 'media');
-
-            // cardContent: child of Content
-            var cardContentEl = $('<div>');
-            cardContentEl.attr('class', 'content');
             
-            // Children of Media
+            // Children of Media ^
             var mediaLeft = $('<div>'); // Media Left
             mediaLeft.attr('class', 'media-left');
                 var mediaFigure = $('<figure>'); // Child of Media Left
@@ -61,16 +62,31 @@ $(() => {
                 mContentSubTitle.attr('class', 'subtitle is-6');
                 mContentSubTitle.text(location); // ## Subtitle ##
 
-            // Appends
-            contentEl.append(cardContentEl); // cardContent: child of Content
-                    
+            // Content: child of cardContent
+            var cardContentEl = $('<div>');
+            cardContentEl.attr('class', 'content');
+            cardContentEl.text(desc); // ## Description ##
+            
+            // Children of Content ^
+            var dateTime = $('<time>');
+            dateTime.attr('datetime', date); // ## Date + Time ##
+            dateTime.text(dayjs(date).format('h:mm A - D MMM YYYY'));
+
+            var brEl = $('<br>');
+
+            // Appends                    
                     mediaFigure.append(mediaImage);
                     mediaLeft.append(mediaFigure);
-                cardMediaEl.append(mediaLeft); 
+                cardMediaEl.append(mediaLeft);
                     mediaContent.append(mContentTitle);
                     mediaContent.append(mContentSubTitle);
                 cardMediaEl.append(mediaContent);
             contentEl.append(cardMediaEl); // Media: child of Content
+
+                cardContentEl.append(brEl);
+                cardContentEl.append(dateTime);
+            contentEl.append(cardContentEl); // cardContent: child of Content
+
             
             cardEl.append(contentEl); // Content: child of Parent
             cardsEl.append(cardEl); // Parent
