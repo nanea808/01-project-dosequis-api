@@ -55,7 +55,9 @@
                             <p class="subtitle is-6">@johnsmith</p>
                         </div>
                     </div>
-
+                    <button class="js-modal-trigger" data-target="our-modal">
+                        Open weather modal
+                    </button>
                     <div class="content">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -80,6 +82,10 @@
                         </div>
                     </div>
 
+                    <button class="js-modal-trigger" data-target="our-modal">
+                        Open weather modal
+                    </button>
+                    
                     <div class="content">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -91,6 +97,28 @@
             </div>
         </div>
     </main>
+
+        <div class="modal" id="our-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Weather at Venue:</p>
+            <button class="delete" aria-label="close" id="close-button"></button>
+          </header>
+          <section class="modal-card-body">
+            <ol id="modal-list">
+                <p>temperature</p>
+                <p>wind speed</p>
+                <p>humidity</p>
+            </ol>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Save changes</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
 </body>
 
 </html>
