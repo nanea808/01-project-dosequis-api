@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticketmaster Weather</title>
+    <link rel="icon" href="http://openweathermap.org/img/wn/10d@2x.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- Link Jquery, Dayjs, and Javascript -->
@@ -15,8 +16,10 @@
 </head>
 
 <body>
+    <!-- Background Hero -->
+    <section class="hero image is-3by1" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
     <nav class="breadcrumb is-medium is-right" aria-label="breadcrumbs">
-        <a class="navbar-burger" id="burger">
+        <a class="navbar-burger has-text-white" id="burger">
             <span></span>
             <span></span>
             <span></span>
@@ -25,25 +28,27 @@
         <div class="navbar-menu" id="nav-links">
           <!-- mobile menu -->
           <div class="navbar-end">
-            <a a href = "" class="navbar-item">Home</a>
-            <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds" class="navbar-item">Ticketmaster</a> 
-            <a href="https://github.com/nanea808/01-project-dosequis-api" class="navbar-item">Github</a>
+            <a a href = "" class="navbar-item has-text-white">Home</a>
+            <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds" class="navbar-item has-text-white">Ticketmaster</a> 
+            <a href="https://github.com/nanea808/01-project-dosequis-api" class="navbar-item has-text-white">Github</a>
           </div>
         </div>
     </nav>
     <section>
-        <div class="block is-size-1 has-text-centered">Search an <strong>event</strong></div>
+        <div class="block is-size-1 has-text-centered has-text-white">Search an event</div>
     </section>
     <form action="" id="user-input">
         <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
         <div class="buttons is-centered py-3">
             <button class="button is-info">Get Event Weather</button>
+            <button class="button is-info">Clear Search</button>
         </div>
     </form>
     
     <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
     <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
-    
+
+</section>
     <main>
         <div class="block" id="cards">
             <div class="card">
@@ -99,8 +104,10 @@
 <footer class="footer">
     <div class="content has-text-centered">
       <p>
+        <figure class="image is-3by1">
+        <img src = "assets/group-6.jpg">
+        </figure>
         <strong>Project Dos Equis API </strong> by <a href="https://github.com/nanea808/01-project-dosequis-api">Snail Team 6</a>
-       
       </p>
     </div>
   </footer>

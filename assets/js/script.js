@@ -6,12 +6,14 @@ $(() => {
     
     burgerIcon.addEventListener('click', () => {
       navbarMenu.classList.toggle('is-active');
+    //   navbarMenu.toggle("class", "navbar-item has-text-black");
     });
 
 
     // Elements
     var userInputEl = $('#user-input');
-    var searchButton = userInputEl.children('.buttons').children('button');
+    var searchButton = userInputEl.children('.buttons').children('button');  //currently broken due to two buttons, use firstChild?
+    // var clearButton = userInputEl.children('.buttons').lastChild('button'); //need to link this to the clear form button
     var cardsEl = $('#cards');
 
     console.log(cardsEl);
