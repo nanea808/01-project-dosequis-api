@@ -6,14 +6,18 @@ $(() => {
 
     burgerIcon.addEventListener('click', () => {
       navbarMenu.classList.toggle('is-active');
+    //   navbarMenu.toggle("class", "navbar-item has-text-black");
     });
 
 
     // Elements
     var userInputEl = $('#user-input');
+
     var searchButton = userInputEl.children('.buttons').children('button');
+    // var clearButton = userInputEl.children('.buttons').lastChild('button'); //need to link this to the clear form button
     var ourModalsList = $('#modal-list');
     console.log(searchButton);
+
     var cardsEl = $('#cards');
 
     console.log(cardsEl);
