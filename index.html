@@ -17,39 +17,46 @@
 
 <body>
     <!-- Background Hero -->
-    
-    <nav class="breadcrumb is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
+
+    <nav class="is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
             <span></span>
-          </a>
-      
+        </a>
+
         <div class="navbar-menu" id="nav-links">
-          <!-- mobile menu -->
-          <div class="navbar-end has-background-primary">
-            <a a href = "" class="navbar-item has-text-white">Home</a>
-            <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds" class="navbar-item has-text-white">Ticketmaster</a> 
-            <a href="https://github.com/nanea808/01-project-dosequis-api" class="navbar-item has-text-white">Github</a>
-          </div>
+            <!-- mobile menu -->
+            <div class="navbar-end has-background-primary">
+                <a a href="" class="navbar-item has-text-white">Home</a>
+                <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds"
+                    class="navbar-item has-text-white">Ticketmaster</a>
+                <a href="https://github.com/nanea808/01-project-dosequis-api"
+                    class="navbar-item has-text-white">Github</a>
+            </div>
         </div>
     </nav>
-    <div class="hero image is-3by1" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
-        
-    <section>
-        <div class="block is-size-1 has-text-centered has-text-white">Search an event</div>
-    </section>
-    <form action="" id="user-input">
-        <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
-        <div class="buttons is-centered py-3">
-            <button class="button is-info">Get Event Weather</button>
-            <button class="button is-info" id="newSearch">Clear Search</button>
+
+
+    <div class="hero image is-3by1" width="720" height="240"> <img src = "assets/concert.jpg">
+
+        <section>
+            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold" id="searchAnEvent">Search an event</div>
+        </section>
+        <form action="" id="user-input">
+            <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
+            <div class="buttons is-centered py-3">
+                <button class="button is-info">Get Event Weather</button>
+                <button class="button is-info" id="newSearch">Clear Search</button>
+            </div>
+        </form>
+
+        <div>
+        <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
+        <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
         </div>
-    </form>
-    
-    <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
-    <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
-</div>
+
+    </div>
 
     <main>
         <div class="block" id="cards">
@@ -96,7 +103,7 @@
                     <button class="js-modal-trigger" data-target="our-modal">
                         Open weather modal
                     </button>
-                    
+
                     <div class="content">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -109,37 +116,38 @@
         </div>
     </main>
 
-        <div class="modal" id="our-modal">
+    <div class="modal" id="our-modal">
         <div class="modal-background"></div>
         <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Weather at Venue:</p>
-            <button class="delete" aria-label="close" id="close-button"></button>
-          </header>
-          <section class="modal-card-body">
-            <ol id="modal-list">
-                <p>temperature</p>
-                <p>wind speed</p>
-                <p>humidity</p>
-            </ol>
-          </section>
-          <footer class="modal-card-foot">
-            <button class="button is-success">Save changes</button>
-            <button class="button">Cancel</button>
-          </footer>
+            <header class="modal-card-head">
+                <p class="modal-card-title">Weather at Venue:</p>
+                <button class="delete" aria-label="close" id="close-button"></button>
+            </header>
+            <section class="modal-card-body">
+                <ol id="modal-list">
+                    <p>temperature</p>
+                    <p>wind speed</p>
+                    <p>humidity</p>
+                </ol>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </footer>
         </div>
-      </div>
+    </div>
 
 </body>
-<footer class="footer">
+<footer class="footer ">
     <div class="content has-text-centered">
-      <p>
+        <p>
         <figure class="image is-3by1">
-        <img src = "assets/group-6.jpg">
+            <img src="assets/group-6.jpg">
         </figure>
-        <strong>Project Dos Equis API </strong> by <a href="https://github.com/nanea808/01-project-dosequis-api">Snail Team 6</a>
-      </p>
+        <strong>Project Dos Equis API </strong> by <a href="https://github.com/nanea808/01-project-dosequis-api">Snail
+            Team 6</a>
+        </p>
     </div>
-  </footer>
+</footer>
 
 </html>
