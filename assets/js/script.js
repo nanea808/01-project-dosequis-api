@@ -17,8 +17,8 @@ $(() => {
     // var clearButton = userInputEl.children('.buttons').lastChild('button'); //need to link this to the clear form button
     var ourModalsList = $('#modal-list');
     console.log(searchButton);
-
     var cardsEl = $('#cards');
+    var numberOfHistoryItems = 5;
 
     console.log(cardsEl);
     // ## Function to load response data as button elements ★ ##
@@ -161,7 +161,10 @@ $(() => {
             eventDiscovery(userKeyword);
         }
     });
+    //create a variable titled searchHistory equal to the contents of our search array in storage.
     let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+
+    //what happens when someone enters a search.
     searchButton.click(function (e) {
         e.preventDefault();
         var inputField = userInputEl.children('input');
@@ -171,9 +174,11 @@ $(() => {
             eventDiscovery(userKeyword);
         }
 
-        eventDiscovery(userKeyword);
-        searchHistory.push(userKeyword);
-        localStorage.setItem("search", JSON.stringify(searchHistory));
+        if(userKeyword != "") {
+            eventDiscovery(userKeyword);
+            searchHistory.push(userKeyword);
+            localStorage.setItem("search", JSON.stringify(searchHistory));
+        }
         setSearchHistory();
     });
 
@@ -181,17 +186,22 @@ $(() => {
     const TITLESEARCH = document.getElementById("lastSearchedTitle");
     function setSearchHistory() {
         SAVEDSEARCH.innerHTML = "";
-        for (let i = 0; i < searchHistory.length; i++) {
-            const SAVEDITEM = document.createElement("input");
-            SAVEDITEM.setAttribute("type", "text");
-            SAVEDITEM.setAttribute("readonly", true);
-            SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button");
-            SAVEDITEM.setAttribute("value", searchHistory[i]);
-            SAVEDITEM.addEventListener("click", function () {
-                eventDiscovery(SAVEDITEM.value);
-            })
-            SAVEDSEARCH.append(SAVEDITEM);
-            TITLESEARCH.setAttribute("class", "block is-size-4 has-text-centered");
+        let totalHistoryLength = searchHistory.length;
+        console.log(totalHistoryLength);
+        //we start at the most recent history items
+        for (let i = 0; i <= numberOfHistoryItems; i++) {
+            if(searchHistory[totalHistoryLength-i]) {
+                const SAVEDITEM = document.createElement("input");
+                SAVEDITEM.setAttribute("type", "text");
+                SAVEDITEM.setAttribute("readonly", true);
+                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button");
+                SAVEDITEM.setAttribute("value", searchHistory[totalHistoryLength-i]);
+                SAVEDITEM.addEventListener("click", function () {
+                    eventDiscovery(SAVEDITEM.value);
+                })
+                SAVEDSEARCH.append(SAVEDITEM);
+                TITLESEARCH.setAttribute("class", "block is-size-4 has-text-centered");
+            }
         }
     }
     setSearchHistory();
