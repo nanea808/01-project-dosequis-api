@@ -14,7 +14,6 @@ $(() => {
     var userInputEl = $('#user-input');
 
     var searchButton = userInputEl.children('.buttons').children('button');
-    // var clearButton = userInputEl.children('.buttons').lastChild('button'); //need to link this to the clear form button
     var ourModalsList = $('#modal-list');
     console.log(searchButton);
 
@@ -231,6 +230,14 @@ $(() => {
           });
         });
       
+        // Clear History button
+        const NEWSEARCH = document.getElementById("newSearch");
+        NEWSEARCH.addEventListener("click", function () {
+        localStorage.clear();
+        searchHistory = [];
+        setSearchHistory();
+        location.reload();
+    })
 });
 
 
