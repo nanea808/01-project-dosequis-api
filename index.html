@@ -18,7 +18,7 @@
 <body>
     <!-- Background Hero -->
 
-    <nav class="is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
+    <nav class="breadbrumb is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
@@ -38,7 +38,7 @@
     </nav>
 
 
-    <div class="hero image is-3by1" width="720" height="240"> <img src = "assets/concert.jpg">
+    <div class="hero image is-3by1 is-background" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
 
         <section>
             <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold" id="searchAnEvent">Search an event</div>
@@ -52,8 +52,8 @@
         </form>
 
         <div>
-        <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
-        <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
+        <p class="" id="lastSearchedTitle">Last Searched:</p>
+        <form class="col-6 col-sm-4 col-lg-2 has-text-centered " id="searchedLast"></form>
         </div>
 
     </div>
