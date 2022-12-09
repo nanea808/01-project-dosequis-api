@@ -207,13 +207,13 @@ $(() => {
                 const SAVEDITEM = document.createElement("input");
                 SAVEDITEM.setAttribute("type", "text");
                 SAVEDITEM.setAttribute("readonly", true);
-                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info ");
+                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info is-size-7-mobile");
                 SAVEDITEM.setAttribute("value", searchHistory[totalHistoryLength-i]);
                 SAVEDITEM.addEventListener("click", function () {
                     eventDiscovery(SAVEDITEM.value);
                 })
                 SAVEDSEARCH.append(SAVEDITEM);
-                TITLESEARCH.setAttribute("class", "block is-size-4 has-text-centered");
+                TITLESEARCH.setAttribute("class", "block is-size-4 has-text-centered is-size-7-mobile has-text-white");
             }
         }
     }
