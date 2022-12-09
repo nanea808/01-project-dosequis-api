@@ -209,7 +209,7 @@ $(() => {
                 const SAVEDITEM = document.createElement("input");
                 SAVEDITEM.setAttribute("type", "text");
                 SAVEDITEM.setAttribute("readonly", true);
-                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button");
+                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info");
                 SAVEDITEM.setAttribute("value", searchHistory[totalHistoryLength-i]);
                 SAVEDITEM.addEventListener("click", function () {
                     eventDiscovery(SAVEDITEM.value);
