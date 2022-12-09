@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticketmaster Weather</title>
-    <link rel="icon" href="http://openweathermap.org/img/wn/10d@2x.png">
+    <link rel="icon" href="https://openweathermap.org/img/wn/10d@2x.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- Link Jquery, Dayjs, and Javascript -->
@@ -18,7 +18,8 @@
 <body>
     <!-- Background Hero -->
 
-    <nav class="breadbrumb is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
+    <nav
+     class="navbar is-fixed-top has-background-primary level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
@@ -26,6 +27,7 @@
         </a>
 
         <div class="navbar-menu" id="nav-links">
+            
             <!-- mobile menu -->
             <div class="navbar-end has-background-primary">
                 <a a href="#searchAnEvent" class="navbar-item has-text-white">Home</a>
@@ -125,14 +127,14 @@
             </header>
             <section class="modal-card-body">
                 <ol id="modal-list">
-                    <p>temperature</p>
+                    <p>weather code</p>
+                <p>temperature</p>
                     <p>wind speed</p>
-                    <p>humidity</p>
+    
                 </ol>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
-                <button class="button">Cancel</button>
+                <p class="content is-small">for weather code definitions,     visit: https://www.jodc.go.jp/data_format/weather-code.html</p>
             </footer>
         </div>
     </div>
