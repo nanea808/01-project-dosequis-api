@@ -140,9 +140,7 @@ $(() => {
     /* 
     Take event id and inject into api call
     var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
-
     Fetch request using requestUrl
-
     Pass lat and lon data into the weather api function ☁
     */
     //the following example lat/lon is for Portland, OR: 
@@ -209,7 +207,7 @@ $(() => {
                 const SAVEDITEM = document.createElement("input");
                 SAVEDITEM.setAttribute("type", "text");
                 SAVEDITEM.setAttribute("readonly", true);
-                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info");
+                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info ");
                 SAVEDITEM.setAttribute("value", searchHistory[totalHistoryLength-i]);
                 SAVEDITEM.addEventListener("click", function () {
                     eventDiscovery(SAVEDITEM.value);
@@ -265,6 +263,3 @@ $(() => {
         location.reload();
     })
 });
-
-
-

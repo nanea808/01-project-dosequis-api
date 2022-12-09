@@ -18,7 +18,7 @@
 <body>
     <!-- Background Hero -->
 
-    <nav class="is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
+    <nav class="breadbrumb is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
@@ -36,21 +36,28 @@
             </div>
         </div>
     </nav>
-    <section>
-        <div class="block is-size-1 has-text-centered has-text-white">Search an event</div>
-    </section>
-    <form action="" id="user-input">
-        <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
-        <div class="buttons is-centered py-3">
-            <button class="button is-info">Get Event Weather</button>
-            <button class="button is-info" id="newSearch">Clear Search</button>
-        </div>
-    </form>
-    
-    <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
-    <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
 
-</section>
+
+    <div class="hero image is-3by1 is-background" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
+
+        <section>
+            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold" id="searchAnEvent">Search an event</div>
+        </section>
+        <form action="" id="user-input">
+            <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
+            <div class="buttons is-centered py-3">
+                <button class="button is-info">Get Event Weather</button>
+                <button class="button is-info" id="newSearch">Clear Search</button>
+            </div>
+        </form>
+
+        <div>
+        <p class="" id="lastSearchedTitle">Last Searched:</p>
+        <form class="col-6 col-sm-4 col-lg-2 has-text-centered " id="searchedLast"></form>
+        </div>
+
+    </div>
+
     <main>
         <div class="block" id="cards">
             <div class="card">
