@@ -5,8 +5,8 @@ $(() => {
     const navbarMenu = document.querySelector('#nav-links');
 
     burgerIcon.addEventListener('click', () => {
-      navbarMenu.classList.toggle('is-active');
-    //   navbarMenu.toggle("class", "navbar-item has-text-black");
+        navbarMenu.classList.toggle('is-active');
+        //   navbarMenu.toggle("class", "navbar-item has-text-black");
     });
 
 
@@ -34,8 +34,10 @@ $(() => {
             var desc = eventsArray[x].classifications[0].genre.name;
             if (!eventsArray[x].dates.start.dateTBA && !eventsArray[x].dates.start.dateTBD) {
                 var date = eventsArray[x].dates.start.dateTime;
-                var time = eventsArray[x].dates.start.localTime;
             }
+
+            var lat = eventsArray[x]._embedded.venues[0].location.latitude;
+            var lon = eventsArray[x]._embedded.venues[0].location.longitute;
 
             // Parent
             var cardEl = $('<div>');
@@ -44,61 +46,75 @@ $(() => {
             // cardContent: child of Parent
             var contentEl = $('<div>');
             contentEl.attr('class', 'card-content');
-            
+
             // Media: child of cardContent
             var cardMediaEl = $('<div>');
             cardMediaEl.attr('class', 'media');
-            
+
             // Children of Media ^
             var mediaLeft = $('<div>'); // Media Left
             mediaLeft.attr('class', 'media-left');
-                var mediaFigure = $('<figure>'); // Child of Media Left
-                mediaFigure.attr('class', 'image is-128x128');
+            var mediaFigure = $('<figure>'); // Child of Media Left
+            mediaFigure.attr('class', 'image is-128x128');
 
-                var mediaImage = $('<img>'); // Child of ^
-                mediaImage.attr('src', imageUrl); // ## Image ##
+            var mediaImage = $('<img>'); // Child of ^
+            mediaImage.attr('src', imageUrl); // ## Image ##
 
             var mediaContent = $('<div>'); // Media Content
             mediaContent.attr('class', 'media-content');
-                var mContentTitle = $('<p>');
-                mContentTitle.attr('class', 'title is-4');
-                mContentTitle.text(title); // ## Title ##
-                var mContentSubTitle = $('<p>');
-                mContentSubTitle.attr('class', 'subtitle is-6');
-                mContentSubTitle.text(location); // ## Subtitle ##
+            var mContentTitle = $('<p>');
+            mContentTitle.attr('class', 'title is-4');
+            mContentTitle.text(title); // ## Title ##
+            var mContentSubTitle = $('<p>');
+            mContentSubTitle.attr('class', 'subtitle is-6');
+            mContentSubTitle.text(location); // ## Subtitle ##
 
             // Content: child of cardContent
             var cardContentEl = $('<div>');
             cardContentEl.attr('class', 'content');
             cardContentEl.text(desc); // ## Description ##
-            
+
             // Children of Content ^
             var dateTime = $('<time>');
             dateTime.attr('datetime', date); // ## Date + Time ##
             dateTime.text(dayjs(date).format('h:mm A - D MMM YYYY'));
 
+            // Line Break
             var brEl = $('<br>');
 
+            // Modal trigger
+            var modalTrigger = $('<button>');
+            modalTrigger.attr('class', 'js-modal-trigger');
+            modalTrigger.attr('data-target', 'our-modal');
+            modalTrigger.text('Open weather modal');
+
+            // Data
+            contentEl.attr('data-dateTime', date);
+            contentEl.attr('data-lat', lat);
+            contentEl.attr('data-lon', lon);
+
             // Appends                    
-                    mediaFigure.append(mediaImage);
-                    mediaLeft.append(mediaFigure);
-                cardMediaEl.append(mediaLeft);
-                    mediaContent.append(mContentTitle);
-                    mediaContent.append(mContentSubTitle);
-                cardMediaEl.append(mediaContent);
+            mediaFigure.append(mediaImage);
+            mediaLeft.append(mediaFigure);
+            cardMediaEl.append(mediaLeft);
+            mediaContent.append(mContentTitle);
+            mediaContent.append(mContentSubTitle);
+            cardMediaEl.append(mediaContent);
             contentEl.append(cardMediaEl); // Media: child of Content
 
-                cardContentEl.append(brEl);
-                cardContentEl.append(dateTime);
+            contentEl.append(modalTrigger);
+
+            cardContentEl.append(brEl);
+            cardContentEl.append(dateTime);
             contentEl.append(cardContentEl); // cardContent: child of Content
 
-            
             cardEl.append(contentEl); // Content: child of Parent
             cardsEl.append(cardEl); // Parent
         }
     }
 
     // ## Function to load weather data as a modal element ♥ ##
+
     function handleWeatherInformation(weatherData,eventDateTime) {
         //the ticketmaster API formats as ISO8601 without the timezone. Example: 
         let weatherApiComparisonDate = eventDateTime.slice(0,13) + ":00";
@@ -133,8 +149,9 @@ $(() => {
             ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
         }
 
+
     }
-    
+
     // ## Event discovery api function ✈ ##
     function eventDiscovery(userInput) {
         // Take user input and inject into api call
@@ -145,12 +162,12 @@ $(() => {
                 return response.json();
             })
             .then(function (data) {
-                    console.log(data);
-                    if (data._embedded) {
-                        loadEvents(data);
-                    }
-                    
-                    // Pass data into the function to load responses onto page ★
+                console.log(data);
+                if (data._embedded) {
+                    loadEvents(data);
+                }
+
+                // Pass data into the function to load responses onto page ★
             });
     }
 
@@ -170,16 +187,16 @@ $(() => {
     // ## One weather api function ☁ ##
     function getWeatherBasedOnLatLon(enteredLat, enteredLon) {
         //Take lat and lon and inject into api call
-        var queryURL = "https://api.open-meteo.com/v1/forecast?latitude=" + enteredLat + "&longitude=" + enteredLon + 
-        "&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
+        var queryURL = "https://api.open-meteo.com/v1/forecast?latitude=" + enteredLat + "&longitude=" + enteredLon +
+            "&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
         //Fetch request
         fetch(queryURL)
             .then(function (response) {
                 return response.json();
             })
-            .then(function(data) {
+            .then(function (data) {
                 // console.log("our data is: "+JSON.stringify(data));
-                console.log("function getWeatherBasedOnLatLon() just ran; at the requested location our temperature is: "+data.current_weather.temperature + "° Fahrenheit.");
+                console.log("function getWeatherBasedOnLatLon() just ran; at the requested location our temperature is: " + data.current_weather.temperature + "° Fahrenheit.");
                 //Take reponse and pass into modal function ♥
                 handleWeatherInformation(data, "2022-12-09T23:30:00Z");
             })
@@ -190,7 +207,7 @@ $(() => {
         e.preventDefault();
         var inputField = userInputEl.children('input');
         var userKeyword = inputField.val().trim();
-        
+
         if (userKeyword.length > 0) {
             eventDiscovery(userKeyword);
         }
@@ -203,12 +220,12 @@ $(() => {
         e.preventDefault();
         var inputField = userInputEl.children('input');
         var userKeyword = inputField.val().trim();
-        
+
         if (userKeyword.length > 0) {
             eventDiscovery(userKeyword);
         }
 
-        if(userKeyword != "") {
+        if (userKeyword != "") {
             eventDiscovery(userKeyword);
             searchHistory.push(userKeyword);
             localStorage.setItem("search", JSON.stringify(searchHistory));
@@ -224,7 +241,7 @@ $(() => {
         console.log(totalHistoryLength);
         //we start at the most recent history items
         for (let i = 0; i <= numberOfHistoryItems; i++) {
-            if(searchHistory[totalHistoryLength-i]) {
+            if (searchHistory[totalHistoryLength - i]) {
                 const SAVEDITEM = document.createElement("input");
                 SAVEDITEM.setAttribute("type", "text");
                 SAVEDITEM.setAttribute("readonly", true);
@@ -247,37 +264,48 @@ $(() => {
     /* Take event id from button elements and pass into location api function ♣ */
 
 
-        // Functions to open and close a modal
-        function openModal($el) {
-          $el.classList.add('is-active');
-        }
-      
-        function closeModal($el) {
-          $el.classList.remove('is-active');
-        }
-        
-        // Add a click event on buttons to open a specific modal
-        (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-          const modal = $trigger.dataset.target;
-          const $target = document.getElementById(modal);
-      
-          $trigger.addEventListener('click', () => {
-            openModal($target);
-          });
-        });
-      
-        // Add a click event on various child elements to close the parent modal
-        (document.querySelectorAll('.modal-close, .delete') || []).forEach(($close) => {
-          const $target = $close.closest('.modal');
-      
-          $close.addEventListener('click', () => {
+    // Functions to open and close a modal
+    function openModal($el) {
+        $el.classList.add('is-active');
+    }
+
+    function closeModal($el) {
+        $el.classList.remove('is-active');
+    }
+
+    // // Add a click event on buttons to open a specific modal
+    // (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    //     const modal = $trigger.dataset.target;
+    //     console.log($trigger);
+    //     const $target = document.getElementById(modal);
+    //     $trigger.addEventListener('click', (e) => {
+    //         openModal($target);
+    //     });
+    // });
+    
+    $('body').on('click', '.js-modal-trigger', function (e) { 
+        // Get time and location variables
+        var target = e.target;
+        const modalId = target.dataset.target;
+        const modalEl = document.getElementById(modalId);
+
+        console.log(modalEl);
+
+        openModal(modalEl);
+    });
+
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-close, .delete') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
             closeModal($target);
-          });
         });
-      
-        // Clear History button
-        const NEWSEARCH = document.getElementById("newSearch");
-        NEWSEARCH.addEventListener("click", function () {
+    });
+
+    // Clear History button
+    const NEWSEARCH = document.getElementById("newSearch");
+    NEWSEARCH.addEventListener("click", function () {
         localStorage.clear();
         searchHistory = [];
         setSearchHistory();
