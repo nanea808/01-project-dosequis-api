@@ -269,7 +269,8 @@ $(() => {
     //         openModal($target);
     //     });
     // });
-    
+
+    // Event listener for modal buttons
     $('body').on('click', '.js-modal-trigger', function (e) { 
         // Get time and location variables
         var card = e.target.offsetParent;
@@ -277,6 +278,7 @@ $(() => {
         var lat = card.dataset.lat;
         var lon = card.dataset.lon;
 
+        // Get modal element
         var target = e.target;
         var modalId = target.dataset.target;
         var modalEl = document.getElementById(modalId);
