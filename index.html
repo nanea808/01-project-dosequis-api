@@ -18,7 +18,7 @@
 <body>
     <!-- Background Hero -->
 
-    <nav class="is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
+    <nav class="breadbrumb is-medium is-right has-background-primary level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
@@ -28,7 +28,7 @@
         <div class="navbar-menu" id="nav-links">
             <!-- mobile menu -->
             <div class="navbar-end has-background-primary">
-                <a a href="" class="navbar-item has-text-white">Home</a>
+                <a a href="#searchAnEvent" class="navbar-item has-text-white">Home</a>
                 <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds"
                     class="navbar-item has-text-white">Ticketmaster</a>
                 <a href="https://github.com/nanea808/01-project-dosequis-api"
@@ -38,23 +38,22 @@
     </nav>
 
 
-    <div class="hero image is-3by1" width="720" height="240"> <img src="assets/concert.jpg">
+    <div class="hero image is-3by1" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
 
         <section>
-            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold" id="searchAnEvent">Search
-                an event</div>
+            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold is-size-5-mobile" id="searchAnEvent">Search an event</div>
         </section>
         <form action="" id="user-input">
-            <input class="input is-large is is-fullwidth has-text-centered" type="text" placeholder="Type event here">
+            <input class="input is-large is-fullwidth has-text-centered is-dark" type="text" placeholder="Type event here">
             <div class="buttons is-centered py-3">
-                <button class="button is-info">Get Event Weather</button>
-                <button class="button is-info" id="newSearch">Clear Search</button>
+                <button class="button is-info is-size-7-mobile">Get Event Weather</button>
+                <button class="button is-info is-size-7-mobile" id="newSearch">Clear Search</button>
             </div>
         </form>
 
         <div>
-            <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
-            <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
+        <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
+        <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
         </div>
 
     </div>
