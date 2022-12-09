@@ -83,20 +83,40 @@ $(() => {
     }
 
     // ## Function to load weather data as a modal element ♥ ##
-    function handleWeatherInformation(weatherData) {
-        console.log("The handleWeatherInformation function is being called with "+JSON.stringify(weatherData) +"as a parameter.");
-        /*things we care about: 
-            temp in Fahrenheit
-            windspeed in mph
-            humidity as a percentage
-            forecast weather (all of the above, except as a forecast)--see note
-        */
-        ourModalsList.children().eq(0).text(weatherData.current_weather.temperature + "° Fahrenheit.");
-        ourModalsList.children().eq(1).text(weatherData.current_weather.windspeed + " mph");
-        //***meteo doesn't offer humidity for current weather. ourModalsList.children().eq(2).text(weatherData.current_weather.humidity + "% humidity");
+    function handleWeatherInformation(weatherData,eventDateTime) {
+        //the ticketmaster API formats as ISO8601 without the timezone. Example: 
+        let weatherApiComparisonDate = eventDateTime.slice(0,13) + ":00";
+        console.log(weatherApiComparisonDate);
+        let rightNow = dayjs().unix();
+        let sevenDaysFromNow = rightNow + 604800;
+        let reformattedDate = dayjs(eventDateTime.slice(0,10)).unix();
+        console.log("0-10 is: "+eventDateTime.slice(0,10));
+        console.log(reformattedDate);
+        //adding hours
+        reformattedDate += (eventDateTime.slice(11,13) * 60 * 60);
+        console.log("11-13 is: "+eventDateTime.slice(11,13));
+        console.log(reformattedDate);
+        //adding minutes
+        reformattedDate += (eventDateTime.slice(14,16) * 60);
+        console.log("14-16 is: "+eventDateTime.slice(14,16));
 
-        // Suggested: we need to figure out the event date/time and get the forecast if it's within the 7-day window.
-        //this function will need to be passed the date/time of the event to figure out what data to display.
+        console.log("our unix is supposed to read: "+1670628600);
+        console.log("instead, our unix reads: "+reformattedDate);
+        //if the event unix is less than or equal to today, or beyond our 7-day forecast window, we just display the current weather.
+        if(reformattedDate <= rightNow || reformattedDate >= sevenDaysFromNow) {
+            ourModalsList.children().eq(0).text("Weathercode: "+weatherData.current_weather.weathercode);
+            ourModalsList.children().eq(1).text("Current temperature is: "+weatherData.current_weather.temperature + "° Fahrenheit.");
+            ourModalsList.children().eq(2).text("Windspeed is: "+weatherData.current_weather.windspeed + " mph");
+        }
+
+        //else, we display the weather on that date.
+        else {
+            let ourDatePosition =  weatherData.hourly.time.indexOf(weatherApiComparisonDate);           
+            ourModalsList.children().eq(0).text("Temperature will be: "+weatherData.hourly.temperature_2m[ourDatePosition] + "° Fahrenheit.");
+            ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
+            ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
+        }
+
     }
     
     // ## Event discovery api function ✈ ##
@@ -124,11 +144,10 @@ $(() => {
     /* 
     Take event id and inject into api call
     var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
-
     Fetch request using requestUrl
-
     Pass lat and lon data into the weather api function ☁
     */
+
     //the following example lat/lon is for Portland, OR: 
     getWeatherBasedOnLatLon(45.523064, -122.676483);
 
@@ -146,7 +165,7 @@ $(() => {
                 // console.log("our data is: "+JSON.stringify(data));
                 console.log("function getWeatherBasedOnLatLon() just ran; at the requested location our temperature is: "+data.current_weather.temperature + "° Fahrenheit.");
                 //Take reponse and pass into modal function ♥
-                handleWeatherInformation(data);
+                handleWeatherInformation(data, "2022-12-09T23:30:00Z");
             })
     }
 
