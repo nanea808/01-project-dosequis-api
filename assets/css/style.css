@@ -2,3 +2,10 @@
     border: 1px solid rgb(196, 196, 196);
     margin: 5px;
 }
+
+.hero {
+    background-repeat:no-repeat;
+    background-position:center;
+    /* opacity: 0.8;  */
+}
+
