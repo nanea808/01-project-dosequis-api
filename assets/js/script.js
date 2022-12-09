@@ -37,7 +37,7 @@ $(() => {
             }
 
             var lat = eventsArray[x]._embedded.venues[0].location.latitude;
-            var lon = eventsArray[x]._embedded.venues[0].location.longitute;
+            var lon = eventsArray[x]._embedded.venues[0].location.longitude;
 
             // Parent
             var cardEl = $('<div>');
@@ -89,9 +89,9 @@ $(() => {
             modalTrigger.text('Open weather modal');
 
             // Data
-            contentEl.attr('data-dateTime', date);
-            contentEl.attr('data-lat', lat);
-            contentEl.attr('data-lon', lon);
+            cardEl.attr('data-dateTime', date);
+            cardEl.attr('data-lat', lat);
+            cardEl.attr('data-lon', lon);
 
             // Appends                    
             mediaFigure.append(mediaImage);
@@ -115,7 +115,7 @@ $(() => {
 
     // ## Function to load weather data as a modal element ♥ ##
 
-    function handleWeatherInformation(weatherData,eventDateTime) {
+    function handleWeatherInformation(weatherData, eventDateTime) {
         //the ticketmaster API formats as ISO8601 without the timezone. Example: 
         let weatherApiComparisonDate = eventDateTime.slice(0,13) + ":00";
         console.log(weatherApiComparisonDate);
@@ -171,21 +171,8 @@ $(() => {
             });
     }
 
-    eventDiscovery("Super Bowl");
-
-    // ## Event location api function ♣ ##
-    /* 
-    Take event id and inject into api call
-    var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
-    Fetch request using requestUrl
-    Pass lat and lon data into the weather api function ☁
-    */
-
-    //the following example lat/lon is for Portland, OR: 
-    getWeatherBasedOnLatLon(45.523064, -122.676483);
-
     // ## One weather api function ☁ ##
-    function getWeatherBasedOnLatLon(enteredLat, enteredLon) {
+    function getWeatherBasedOnLatLon(enteredLat, enteredLon, enteredDateTime) {
         //Take lat and lon and inject into api call
         var queryURL = "https://api.open-meteo.com/v1/forecast?latitude=" + enteredLat + "&longitude=" + enteredLon +
             "&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
@@ -198,7 +185,7 @@ $(() => {
                 // console.log("our data is: "+JSON.stringify(data));
                 console.log("function getWeatherBasedOnLatLon() just ran; at the requested location our temperature is: " + data.current_weather.temperature + "° Fahrenheit.");
                 //Take reponse and pass into modal function ♥
-                handleWeatherInformation(data, "2022-12-09T23:30:00Z");
+                handleWeatherInformation(data, enteredDateTime);
             })
     }
 
@@ -285,12 +272,16 @@ $(() => {
     
     $('body').on('click', '.js-modal-trigger', function (e) { 
         // Get time and location variables
+        var card = e.target.offsetParent;
+        var timeDate = card.dataset.datetime;
+        var lat = card.dataset.lat;
+        var lon = card.dataset.lon;
+
         var target = e.target;
-        const modalId = target.dataset.target;
-        const modalEl = document.getElementById(modalId);
+        var modalId = target.dataset.target;
+        var modalEl = document.getElementById(modalId);
 
-        console.log(modalEl);
-
+        getWeatherBasedOnLatLon(lat, lon, timeDate);
         openModal(modalEl);
     });
 
