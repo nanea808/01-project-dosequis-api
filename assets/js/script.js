@@ -31,7 +31,9 @@ $(() => {
             var imageUrl = eventsArray[x].images[0].url;
             var title = eventsArray[x].name;
             var location = eventsArray[x]._embedded.venues[0].city.name + ", " + eventsArray[x]._embedded.venues[0].state.name;
-            var desc = eventsArray[x].classifications[0].genre.name;
+            if (eventsArray[x].classifications[0].genre.name != "Undefined") {
+                var desc = eventsArray[x].classifications[0].genre.name;
+            }
             if (!eventsArray[x].dates.start.dateTBA && !eventsArray[x].dates.start.dateTBD) {
                 var date = eventsArray[x].dates.start.dateTime;
             }
