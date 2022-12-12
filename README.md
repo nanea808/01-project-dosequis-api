@@ -12,15 +12,18 @@ As a user I want to be able to search for events with information about it's loc
 
 ## Installation
 
-N/A
+Github pages hosting: https://nanea808.github.io/01-project-dosequis-api/
 
 ## Usage
 
-Screenshot of webpage goes here.
+![alt text](./assets/screenshot.JPG)
 
 
 ## Credits
-
+Technologies: HTML, CSS< Javascript, JQuery, Dayjs
+Additional Framework used: Bulma
+API #1: Ticketmaster API - https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/
+API #2: Open-Mateo API - https://open-meteo.com/en
 
 ## Developers
 
