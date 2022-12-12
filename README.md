@@ -20,9 +20,9 @@ Github pages hosting: https://nanea808.github.io/01-project-dosequis-api/
 
 
 ## Credits
-Technologies: HTML, CSS< Javascript, JQuery, Dayjs
-Additional Framework used: Bulma
-API #1: Ticketmaster API - https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/
+Technologies: HTML, CSS, Javascript, JQuery, Dayjs <br>
+Additional Framework used: Bulma <br>
+API #1: Ticketmaster API - https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/ <br>
 API #2: Open-Mateo API - https://open-meteo.com/en
 
 ## Developers
