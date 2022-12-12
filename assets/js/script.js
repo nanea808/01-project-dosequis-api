@@ -118,38 +118,50 @@ $(() => {
     function handleWeatherInformation(weatherData,eventDateTime) {
         //the ticketmaster API formats as ISO8601 without the timezone. Example: 
         let weatherApiComparisonDate = eventDateTime.slice(0,13) + ":00";
-        console.log(weatherApiComparisonDate);
-        let rightNow = dayjs().unix();
-        let sevenDaysFromNow = rightNow + 604800;
-        let reformattedDate = dayjs(eventDateTime.slice(0,10)).unix();
-        console.log("0-10 is: "+eventDateTime.slice(0,10));
-        console.log(reformattedDate);
-        //adding hours
-        reformattedDate += (eventDateTime.slice(11,13) * 60 * 60);
-        console.log("11-13 is: "+eventDateTime.slice(11,13));
-        console.log(reformattedDate);
-        //adding minutes
-        reformattedDate += (eventDateTime.slice(14,16) * 60);
-        console.log("14-16 is: "+eventDateTime.slice(14,16));
-
-        console.log("our unix is supposed to read: "+1670628600);
-        console.log("instead, our unix reads: "+reformattedDate);
-        //if the event unix is less than or equal to today, or beyond our 7-day forecast window, we just display the current weather.
-        if(reformattedDate <= rightNow || reformattedDate >= sevenDaysFromNow) {
+        //simplifying. If the comparison date exists in our array of weather dates/times, we set the modal to display that.
+        if(weatherData.hourly.time.indexOf(weatherApiComparisonDate) >= 0) {
+            let ourDatePosition =  weatherData.hourly.time.indexOf(weatherApiComparisonDate);
+            ourModalsList.children().eq(0).text("Temperature will be: "+weatherData.hourly.temperature_2m[ourDatePosition] + "° Fahrenheit.");
+            ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
+            ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
+        }
+        else {
             ourModalsList.children().eq(0).text("Weathercode: "+weatherData.current_weather.weathercode);
             ourModalsList.children().eq(1).text("Current temperature is: "+weatherData.current_weather.temperature + "° Fahrenheit.");
             ourModalsList.children().eq(2).text("Windspeed is: "+weatherData.current_weather.windspeed + " mph");
         }
 
-        //else, we display the weather on that date.
-        else {
-            let ourDatePosition =  weatherData.hourly.time.indexOf(weatherApiComparisonDate);           
-            ourModalsList.children().eq(0).text("Temperature will be: "+weatherData.hourly.temperature_2m[ourDatePosition] + "° Fahrenheit.");
-            ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
-            ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
-        }
+        // console.log(weatherApiComparisonDate);
+        // let rightNow = dayjs().unix();
+        // let sevenDaysFromNow = rightNow + 604800;
 
+        // //note: dayjs defaults to local time. This is a problem. I need to figure out how to use the timezone plugin to change the default to a location in GMT.
+        // let reformattedDate = dayjs(eventDateTime.slice(0,10)).unix();
+        // console.log("reformatted date is: "+reformattedDate);
+        // //adding hours
+        // reformattedDate += (eventDateTime.slice(11,13) * 60 * 60);
+        // console.log("11-13 is: "+eventDateTime.slice(11,13));
+        // console.log(reformattedDate);
+        // //adding minutes
+        // reformattedDate += (eventDateTime.slice(14,16) * 60);
+        // console.log("14-16 is: "+eventDateTime.slice(14,16));
 
+        // console.log("our unix is supposed to read: "+1670628600);
+        // console.log("instead, our unix reads: "+reformattedDate);
+        // //if the event unix is less than or equal to today, or beyond our 7-day forecast window, we just display the current weather.
+        // if(reformattedDate <= rightNow || reformattedDate >= sevenDaysFromNow) {
+        //     ourModalsList.children().eq(0).text("Weathercode: "+weatherData.current_weather.weathercode);
+        //     ourModalsList.children().eq(1).text("Current temperature is: "+weatherData.current_weather.temperature + "° Fahrenheit.");
+        //     ourModalsList.children().eq(2).text("Windspeed is: "+weatherData.current_weather.windspeed + " mph");
+        // }
+
+        // //else, we display the forecast on that date.
+        // else {
+        //     let ourDatePosition =  weatherData.hourly.time.indexOf(weatherApiComparisonDate);           
+        //     ourModalsList.children().eq(0).text("Temperature will be: "+weatherData.hourly.temperature_2m[ourDatePosition] + "° Fahrenheit.");
+        //     ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
+        //     ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
+        // }
     }
 
     // ## Event discovery api function ✈ ##
@@ -182,7 +194,8 @@ $(() => {
     */
 
     //the following example lat/lon is for Portland, OR: 
-    getWeatherBasedOnLatLon(45.523064, -122.676483);
+    let exampleGetWeatherRun = getWeatherBasedOnLatLon(45.523064, -122.676483);
+    //pass the weather data and the date into our modal function when we click a button.
 
     // ## One weather api function ☁ ##
     function getWeatherBasedOnLatLon(enteredLat, enteredLon) {
@@ -198,7 +211,7 @@ $(() => {
                 // console.log("our data is: "+JSON.stringify(data));
                 console.log("function getWeatherBasedOnLatLon() just ran; at the requested location our temperature is: " + data.current_weather.temperature + "° Fahrenheit.");
                 //Take reponse and pass into modal function ♥
-                handleWeatherInformation(data, "2022-12-09T23:30:00Z");
+                return data;
             })
     }
 
