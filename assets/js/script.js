@@ -120,6 +120,20 @@ $(() => {
     function handleWeatherInformation(weatherData, eventDateTime) {
         //the ticketmaster API formats as ISO8601 without the timezone. Example: 
         let weatherApiComparisonDate = eventDateTime.slice(0,13) + ":00";
+        //identify the current position of the event date in our weather API. If it isn't there, ourDatePosition == -1.
+        let ourDatePosition =  weatherData.hourly.time.indexOf(weatherApiComparisonDate);
+        if(ourDatePosition >= 0) {
+            ourModalsList.children().eq(0).text("Temperature will be: "+weatherData.hourly.temperature_2m[ourDatePosition] + "° Fahrenheit.");
+            ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
+            ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
+        }
+        else {
+            ourModalsList.children().eq(0).text("The WMO weathercode is currently: "+weatherData.current_weather.weathercode);
+            ourModalsList.children().eq(1).text("Current temperature is: "+weatherData.current_weather.temperature + "° Fahrenheit.");
+            ourModalsList.children().eq(2).text("Windspeed is currently: "+weatherData.current_weather.windspeed + " mph");
+        }
+
+        /*
         console.log(weatherApiComparisonDate);
         let rightNow = dayjs().unix();
         let sevenDaysFromNow = rightNow + 604800;
@@ -150,7 +164,7 @@ $(() => {
             ourModalsList.children().eq(1).text("Relative humidity will be: "+weatherData.hourly.relativehumidity_2m[ourDatePosition] + "%.");
             ourModalsList.children().eq(2).text("Windspeed will be: "+weatherData.hourly.windspeed_10m[ourDatePosition] + " mph.");
         }
-
+        */
 
     }
 
@@ -172,6 +186,17 @@ $(() => {
                 // Pass data into the function to load responses onto page ★
             });
     }
+
+
+
+    // ## Event location api function ♣ ##
+    /* 
+    Take event id and inject into api call
+    var requestUrl = 'https://app.ticketmaster.com/discovery/v2/events/' + id + '&apikey={apikey}'
+    Fetch request using requestUrl
+    Pass lat and lon data into the weather api function ☁
+    */
+
 
     // ## One weather api function ☁ ##
     function getWeatherBasedOnLatLon(enteredLat, enteredLon, enteredDateTime) {
@@ -284,7 +309,7 @@ $(() => {
         var target = e.target;
         var modalId = target.dataset.target;
         var modalEl = document.getElementById(modalId);
-
+        console.log("timeDate is: "+timeDate);
         getWeatherBasedOnLatLon(lat, lon, timeDate);
         openModal(modalEl);
     });
