@@ -48,6 +48,8 @@ $(() => {
             // cardContent: child of Parent
             var contentEl = $('<div>');
             contentEl.attr('class', 'card-content');
+            
+            
 
             // Media: child of cardContent
             var cardMediaEl = $('<div>');
@@ -259,7 +261,7 @@ $(() => {
                 const SAVEDITEM = document.createElement("input");
                 SAVEDITEM.setAttribute("type", "text");
                 SAVEDITEM.setAttribute("readonly", true);
-                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info is-size-7-mobile");
+                SAVEDITEM.setAttribute("class", "block is-size-6 has-text-centered button is-info is-size-7-mobile has-background-dark");
                 SAVEDITEM.setAttribute("value", searchHistory[totalHistoryLength-i]);
                 SAVEDITEM.addEventListener("click", function () {
                     eventDiscovery(SAVEDITEM.value);

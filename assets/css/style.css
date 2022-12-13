@@ -1,4 +1,4 @@
-.card {
+/* .card {
     border: 1px solid rgb(196, 196, 196);
     margin: 5px;
 }
@@ -6,12 +6,75 @@
 .hero {
     background-repeat:no-repeat;
     background-position:center;
-    opacity: 0.8;
+    
    
 }
+
 
 .footer{
     background-repeat:no-repeat;
     background-position:center;
     background-size: cover;
+} */
+
+
+.card-content {
+    background-color: #27323d;
+    
+    
+}
+
+/* style for event genre and date */
+.content, 
+.title {
+    color: #f1d9b7;
+    font-size: 18px;
+}
+
+/* style for location */
+.subtitle {
+    color: #e8eaeb;
+}
+
+.js-modal-trigger {
+    background-color: #353f4a;
+    color: white;
+    padding: 17px 70px;
+    font-size: 20px;
+    border-radius: 20px;
+    
+
+}
+
+.js-modal-trigger:hover {
+    background-color: #f1d9b7;
+    color: #353f4a
+    
+
+}
+
+.modal-card-body {
+    background-color: #353f4a;
+    color: #e8eaeb;
+}
+
+.modal-card-foot {
+    background-color: #090814;
+}
+
+.modal-card-head {
+    background-color: #090814;
+}
+
+.modal-card-title {
+    color: #e8eaeb;
+}
+
+#burger.navbar-burger {
+    color: white
+}
+
+#burger.navbar-burger:hover {
+    background-color:#f1d9b7 ;
+    
 }
