@@ -18,8 +18,7 @@
 <body>
     <!-- Background Hero -->
 
-    <nav
-     class="navbar is-fixed-top has-background-primary level-right" aria-label="breadcrumbs">
+    <nav class="navbar is-fixed-top has-background-dark level-right" aria-label="breadcrumbs">
         <a class="navbar-burger" id="burger">
             <span></span>
             <span></span>
@@ -27,43 +26,51 @@
         </a>
 
         <div class="navbar-menu" id="nav-links">
-            
+
             <!-- mobile menu -->
-            <div class="navbar-end has-background-primary">
+            <div class="navbar-end has-background-dark">
                 <a a href="#searchAnEvent" class="navbar-item has-text-white">Home</a>
                 <a href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&gclid=Cj0KCQiAyracBhDoARIsACGFcS7GkhoRwYd9YXdoBlu2mbKddAPAYn3xAM8vKRHutMuEqYogtaL5N3QaApibEALw_wcB&gclsrc=aw.ds"
                     class="navbar-item has-text-white">Ticketmaster</a>
                 <a href="https://github.com/nanea808/01-project-dosequis-api"
                     class="navbar-item has-text-white">Github</a>
+                    <a href="/assets/link.html"
+                    class="navbar-item has-text-white"> Developers</a>
             </div>
         </div>
     </nav>
 
 
-    <div class="hero image is-3by1" width="720" height="240" style="background-image: url(./assets/concert.jpg)">
+    <!-- <div class="hero image is-3by1" width="720" height="240" style="background-image: url(./assets/concert.jpg)"> -->
+    <section class="hero is-halfheight">
+        <div class="hero-body" style="background-image: url(./assets/concert.jpg)">"
 
-        <section>
-            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold is-size-5-mobile" id="searchAnEvent">Search an event</div>
-        </section>
-        <form action="" id="user-input">
-            <input class="input is-large is-fullwidth has-text-centered is-dark" type="text" placeholder="Type event here">
-            <div class="buttons is-centered py-3">
-                <button class="button is-info is-size-7-mobile">Get Event Weather</button>
-                <button class="button is-info is-size-7-mobile" id="newSearch">Clear Search</button>
+<div class="container">
+            <div class="block is-size-1 has-text-centered has-text-white has-text-weight-bold is-size-5-mobile"
+                id="searchAnEvent">Search an event</div>
+
+            <form action="" id="user-input">
+                <input class="input is-large has-text-centered is-dark" type="text"
+                    placeholder="Type event here">
+                <div class="buttons is-centered py-3">
+                    <button class="button is-dark is-size-7-mobile">Get Event Weather</button>
+                    <button class="button is-dark is-size-7-mobile" id="newSearch">Clear Search</button>
+                </div>
+
+            </form>
+
+            <div>
+                <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
+                <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
+            </div>
+            
             </div>
 
-        </form>
-
-        <div>
-        <p class="is-hidden" id="lastSearchedTitle">Last Searched:</p>
-        <form class="col-6 col-sm-4 col-lg-2" id="searchedLast"></form>
-        </div>
-
-    </div>
-
+    </section>
+    
     <main>
-        <div class="block" id="cards">
-            <!-- <div class="card">
+    <div class="block" id="cards">
+        <!-- <div class="card">
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">
@@ -89,7 +96,7 @@
                 </div>
             </div> -->
 
-            <!-- <div class="card">
+        <!-- <div class="card">
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">
@@ -116,11 +123,13 @@
                     </div>
                 </div>
             </div> -->
-        </div>
+    </div>
     </main>
 
-    <div class="modal" id="our-modal">
+    <div class="modal " id="our-modal">
         <div class="modal-background"></div>
+
+
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Weather at Venue:</p>
@@ -129,29 +138,30 @@
             <section class="modal-card-body">
                 <ol id="modal-list">
                     <p>weather code</p>
-                <p>temperature</p>
+                    <p>temperature</p>
                     <p>wind speed</p>
-    
+
                 </ol>
             </section>
             <footer class="modal-card-foot">
-                <p class="content is-small">for weather code definitions,     visit: https://www.jodc.go.jp/data_format/weather-code.html</p>
+                <p class="content is-small">for weather code definitions, visit:
+                    https://www.jodc.go.jp/data_format/weather-code.html</p>
             </footer>
         </div>
     </div>
 
 </body>
-<footer>
-    <div class="content has-text-centered">
-        <section class="footer image is-3by1 px-0" width="720" height="240"
-            style="background-image: url(assets/group-6.jpg)">
-            <p class="is-align-content-end">
-                <strong>Project Dos Equis API </strong> by <a
-                    href="https://github.com/nanea808/01-project-dosequis-api">Snail Team 6</a>
-            </p>
-        </section>
 
+
+<footer class="footer has-background-dark has-text-light">
+    <div class="content has-text-centered">
+        <p>
+            <!-- need to put a different color for link -->
+            Project Dos Equis API by <a class="has-text-white"
+                href="https://github.com/nanea808/01-project-dosequis-api">Snail Team 6</a>
+        </p>
     </div>
+
 </footer>
 
 </html>
