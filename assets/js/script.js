@@ -267,7 +267,7 @@ $(() => {
                     eventDiscovery(SAVEDITEM.value);
                 })
                 SAVEDSEARCH.append(SAVEDITEM);
-                TITLESEARCH.setAttribute("class", "block is-size-4 has-text-centered is-size-7-mobile has-text-white");
+                TITLESEARCH.setAttribute("class", "block is-size-4 is-size-7-mobile has-text-dark has-text-weight-bold");
             }
         }
     }
